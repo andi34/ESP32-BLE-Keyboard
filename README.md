@@ -39,6 +39,9 @@ BleKeyboard bleKeyboard;
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
+// Apple?
+// bleKeyboard.set_vendor_id(0x05ac);
+// bleKeyboard.set_product_id(0x820a);
   bleKeyboard.begin();
 }
 
