@@ -130,7 +130,13 @@ void BleKeyboard::begin(void)
   BLEDevice::setSecurityAuth(true, true, true);
 #else
   BLESecurity* pSecurity = new BLESecurity();
+
+#if defined(CONFIG_IDF_TARGET_ESP32S3) || defined(CONFIG_IDF_TARGET_ESP32C3)
+  pSecurity->setAuthenticationMode(ESP_LE_AUTH_BOND);
+#else
   pSecurity->setAuthenticationMode(ESP_LE_AUTH_REQ_SC_MITM_BOND);
+#endif
+
 #endif // USE_NIMBLE
 
   hid->reportMap((uint8_t*)_hidReportDescriptor, sizeof(_hidReportDescriptor));
